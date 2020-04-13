@@ -9,14 +9,17 @@ function Food({ name, desc }) {
 
 const testDatas = [
         {
+            id: 0,
             title: "A",
             type: "Arch"
         },
         {
+            id: 1,
             title: "B",
             type: "Bear"
         },
         {
+            id: 2,
             title: "C",
             type: "Cute"
         }
@@ -27,7 +30,7 @@ function App() {
       <div>
           <h1>Hello</h1>
           {testDatas.map(item => (
-              <Food  name={item.title} desc={item.type} />
+              <Food key={item.id} name={item.title} desc={item.type} />
           ))}
       </div>
   );
