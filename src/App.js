@@ -4,10 +4,24 @@ import PropTypes from "prop-types";
 // 클래스 컴포넌트. function이 아니기에 return이 없고, import한 React에서 받아온 render method가 있음
 class App extends React.Component{
     state = {
-
+        count: 0
     }
+
+    add = () => {
+        this.setState(current => ({count: current.count+1}));
+    };
+    minus = () => {
+        this.setState(current => ({count: current.count-1}));
+    };
+
     render(){
-        return <h1>I'm a class component.</h1>
+        return (
+            <div>
+                <h1>The number is : {this.state.count}</h1>
+                <button onClick={this.add}> + </button>
+                <button onClick={this.minus}> - </button>
+            </div>
+        );
     }
 }
 
