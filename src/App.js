@@ -22,11 +22,16 @@ const testDatas = [
         }
     ];
 
+function renderItem(eachItem) {
+    console.log(eachItem);
+    return <Food name={eachItem.title} desc={eachItem.type} />
+}
+
 function App() {
   return (
       <div>
           <h1>Hello</h1>
-          {testDatas.map(item => <Food  name={item.title} desc={item.type} />)}
+          {testDatas.map(renderItem)}
       </div>
   );
 }
