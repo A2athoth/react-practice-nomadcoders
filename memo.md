@@ -247,3 +247,65 @@ https://stackoverflow.com/questions/36051891/esri-failed-to-parse-source-map
 
 setState에 원래 state에 선언 안한 걸 넣어도 괜찮다. 다만 미리 넣어두는게 좋은 습관.
 즉 극단적으론 state 자체를 안써도 setState로 넣을 수 있다.
+
+--------------------------------------------
+
+https://yts.mx/api
+를 사용예정
+
+https://yts.mx/api/v2/list_movies.json
+근데 이게 계속 변한다.(익명성 때문)
+
+https://github.com/serranoarevalo/yts-proxy
+니콜라스가 만든 우회 api를 사용
+
+https://yts-proxy.now.sh/~로 쓰면됨
+위의 링크는 결국
+https://yts-proxy.now.sh/list_movies.json
+이걸로 대체됨
+
+axios는 좀 느리다. 시간이 걸릴 수 있다.
+우리는 javascript에게 componentDidMount 함수가 끝날 때가지 약간 시간이 걸릴수 있으니 기다리라고 해야한다.
+그걸위해 componentDidMount앞에 async를 붙이거나 함수로 만들수 있다.(일단 여기선 함수로)
+
+우린 javascript에 다시 말해야한다. 우리의 getMovie function에게 시간이 좀 필요하니 기다려야 한다고.
+
+그리고 함수 내부에선 내가 뭘 기다리길 원해? axios? 그게 끝날때까지 기다려
+(ES6)
+
+   getMovies = async () => {
+        const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+    }
+
+---------------------------------
+
+    state = {
+        isLoading: true,
+        movies: []
+    };
+
+    getMovies = async () => {
+        const {
+            data: {
+                data: {movies}
+            }
+        } = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+        this.setState({movies:movies});
+        console.log(this.state.movies);
+    }
+
+대충 이렇게 state에 넣을 수 있다. 근데 좀 더 세련되기 할 수 있다.
+
+        this.setState({movies});
+이것만 해도 먹힌다.
+
+// 컴포넌트가 state가 필요없으면 굳이 클래스 컴포넌트여야 할 이유가 없다.
+
+api를 보면 query param으로 정렬이 가능하다.
+axios.get("https://yts-proxy.now.sh/list_movies.json?sort_by=rating");
+
+---------------------------------------------
+style component
+jsx내 html에 style={{}}로 넣으면 됨
+
+다른 방식. css 파일
