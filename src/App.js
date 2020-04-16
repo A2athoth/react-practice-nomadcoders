@@ -24,20 +24,26 @@ class App extends React.Component {
     render() {
         const { isLoading, movies } = this.state;       // es6의 마법
         return (
-            <div>
-                {isLoading
-                    ? "Loading"
-                    : movies.map(movie => (
-                    <Movie
-                        key={movie.id}      // key값 필요
-                        id={movie.id}
-                        year={movie.year}
-                        title={movie.title}
-                        summary={movie.summary}
-                        poster={movie.medium_cover_image}
-                    />     // map으로 부터 return
-                ))}
-            </div>
+            <section className="container">
+                {isLoading ? (
+                    <div className="loader">
+                        <span className={"loader__text"}>Loading...</span>
+                    </div>
+                ) : (
+                    <div className="movies">
+                        {movies.map(movie => (
+                            <Movie
+                                key={movie.id}      // key값 필요
+                                id={movie.id}
+                                year={movie.year}
+                                title={movie.title}
+                                summary={movie.summary}
+                                poster={movie.medium_cover_image}
+                            />
+                        ))}
+                    </div>
+                )}
+            </section>
         );
     }
 }
