@@ -4,7 +4,7 @@ import axios from 'axios';
 class App extends React.Component {
     state = {
         isLoading: true,
-        movie: []
+        movies: []
     };
 
     getMovies = async () => {
@@ -13,7 +13,8 @@ class App extends React.Component {
                 data: {movies}
             }
         } = await axios.get("https://yts-proxy.now.sh/list_movies.json");
-        console.log(movies);
+        this.setState({movies:movies});
+        console.log(this.state.movies);
     }
 
     componentDidMount() {
