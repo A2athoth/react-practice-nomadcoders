@@ -309,3 +309,50 @@ style component
 jsx내 html에 style={{}}로 넣으면 됨
 
 다른 방식. css 파일
+
+----------------------------------------------------------------
+
+npm i gh-pages
+깃헙 페이지 도메인에 static 웹사이트를 올려주는 패키지
+
+일반적으로 동작 방식은, 깃헙 에서 내 프로젝트 이름을 가져옴
+
+유저네임.github.io/프로젝트명
+
+이걸 올리려면 위에 설치뿐 아니라 package.json도 건드려야 한다.
+거기서 최대 밖 {} 바로 안쪽에 이를 추가
+
+"homepage": "https://a2athoth.github.io/react-practice-nomadcoders/"
+다 소문자여야 한다.
+
+package json에 스크립트에도 추가해야함
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
+npm run deploy할 때마다 npm은 똑똑해서 predeploy를 먼저 호출, 그게 끝나면 build 폴더(-d)를 deploy한다.
+
+난 계속 정체불명 오류가 났다...
+웃긴건 deploy통해서 predeploy하고 deploy되면 저 코드가 오류나고
+걍 수동으로 gh-pages -d build하면 퍼블리시 되더라.
+
+git-upload-pack '.': git-upload-pack: command not found
+fatal: Could not read from remote repository.
+
+이건 결국 git-upload-pack이 있는 아래 경로를 path에 추가해놔야 했었다는듯 하더라
+
+C:\Program Files\Git\mingw64\bin
+C:\Program Files\Git\mingw64\libexec\git-core
+path 환경변수로 등록 후 재시작...
+
+참조
+https://stackoverflow.com/questions/51748946/git-upload-pack-not-found-when-deploying
+
+내가 직접 gh-pages -d build하면 불러와지는게 script로 라우팅했을때는 못불러오는거려나.
+
+오류가 바꼇다
+error: cannot spawn sh: No such file or directory
+fatal: could not read Username for 'https://github.com': No such file or directory
+
+인텔리제이 설정에서 github 설정들가서 로그인까지 해도 마찬가지다.
+직접 gh-pages 뭐시기 치면 publish되는데 deploy통해선 왜 안되지
+
+우선 문제 자체는 해결을 못햇다. path야 냅둔다 쳐도... 직접 쳐서 puglish는 되는데 순서대로는 안된다니 흠...
