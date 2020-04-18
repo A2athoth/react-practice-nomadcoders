@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c1cc49e10ae989a10626b792bb45c687",
+    "revision": "1a9b1f3ccfc40512e41dea4ec15ef36a",
     "url": "/react-practice-nomadcoders/index.html"
   },
   {
-    "revision": "9fd840e7686ea7a9f662",
-    "url": "/react-practice-nomadcoders/static/css/main.68c30a09.chunk.css"
+    "revision": "31e920577b60e465600c",
+    "url": "/react-practice-nomadcoders/static/css/main.0007556f.chunk.css"
   },
   {
     "revision": "70a05c03abea89e943bd",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-practice-nomadcoders/static/js/2.261ed214.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9fd840e7686ea7a9f662",
+    "revision": "31e920577b60e465600c",
     "url": "/react-practice-nomadcoders/static/js/main.0c263f57.chunk.js"
   },
   {
