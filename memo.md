@@ -356,3 +356,49 @@ fatal: could not read Username for 'https://github.com': No such file or directo
 직접 gh-pages 뭐시기 치면 publish되는데 deploy통해선 왜 안되지
 
 우선 문제 자체는 해결을 못햇다. path야 냅둔다 쳐도... 직접 쳐서 puglish는 되는데 순서대로는 안된다니 흠...
+
+
+
+https://stackoverflow.com/questions/22147574/fatal-could-not-read-username-for-https-github-com-no-such-file-or-directo
+이런 글을 보고 한번
+git config --global user.name
+를 쳐보니... j9uery가 나왓다 ㅡ.ㅡ
+
+git config --global user.name "a2athoth"
+로 바꾸고 다시시도
+에러는 마찬가지
+
+그 아래 setup ssh키 부분 말고 두번째 git remote add origin https://{username}:{password}@github.com/{username}/project.git
+를 해볼까 하다 누가 '기존거 지우고 했다'는데 그걸 걍 수정으로도 된다는듯함
+
+git remote add origin https://{username}:{password}@github.com/{username}/project.git
+코드 말고
+git remote set-url origin https://{username}:{password}@github.com/{username}/project.git
+
+git config --global user.name "a2athoth"
+git config --global user.email blockchain.azathoth@gmail.com
+
+대충 이것도 해보고... intelliJ의 깃 로그인을 다시 대문자 넣어서 해봤다. - 로그인됨
+
+형에게 문의 결과... 상당히 어이없는 결론이 나왔다.
+
+!!!!결론은
+sh(shell뭐시기...)를 깃 자체걸로 하니 됬다... 결국 cmd쪽 이슈였던듯 싶다.
+어쩐지 gh-pages -d build를 직접치니 됬지만, npm run deploy는 안되더만...
+
+setting - tool - terminal에 shell path를 
+C:\Program Files\Git\bin\sh.exe
+이걸로 해결하니... 문제가 해결됨...
+
+!!!!결론
+내가 한건 
+C:\Program Files\Git\mingw64\bin
+C:\Program Files\Git\mingw64\libexec\git-core
+path 환경변수로 등록 후 재시작...
+git config --global user.name "a2athoth"
+git config --global user.email blockchain.azathoth@gmail.com
+이것들인데 얘네는 딱히 얘네는 해결해준거 같지 않고...
+
+setting - tool - terminal에 shell path를 
+C:\Program Files\Git\bin\sh.exe
+이걸로 해결했다.
