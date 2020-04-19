@@ -402,3 +402,103 @@ git config --global user.email blockchain.azathoth@gmail.com
 setting - tool - terminal에 shell path를 
 C:\Program Files\Git\bin\sh.exe
 이걸로 해결했다.
+
+--------------------------------------------------------------
+우린 더이상 state를 갖기 위해 class component를 고집해야 할 필요가 없다.
+react hook이란 것 때문에.
+이건 class component를 대체하는것도 아니고, class component가 구식이란것도 아니다.
+단순히 !!!!다른 방식일 뿐
+
+---------------------------------------------
+
+import React from "react";
+import { HashRouter, Route } from "react-router-dom";
+import About from "./routes/About"
+
+function App() {
+    return <HashRouter>
+        <Route path="/about" compornent={About} />
+    </HashRouter>
+}
+
+export default App;
+
+이건
+
+import React from "react";
+import { HashRouter, Route } from "react-router-dom";
+import {About as poop} from "./routes/About"
+
+function App() {
+    return <HashRouter>
+        <Route path="/about" compornent={poop} />
+    </HashRouter>
+}
+
+export default App;
+
+이거처럼 컴포넌트 명은 달라저도 됨.
+
+주소에 /#/ 들어가는건 냅두고 뒤에 붙이거나 할것
+
+-------------------------------------------------
+
+function App() {
+    return <HashRouter>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+    </HashRouter>
+}
+이방식 라우팅이 되는데 이건 주소 바뀌는거에 따라 '추가되듯' 남더라.
+
+    return <HashRouter>
+        <Navigation />
+        <Route path="/" exact={true} component={Home} />
+        <Route path="/about" component={About} />
+    </HashRouter>
+이 방식을 통해 / 일때 "만"(/hfjfhf 말고) 홈을 렌더링하는것이 가능
+
+리액트에 Navigation component를 만들고, a링크로 라우팅하려면, 링크가 페이지를 새로고침 해버린다. 그걸 방지하려면
+react-router-dom을 써야한다.
+
+------------------------------------------------------------------------
+
+import { Link } from "react-router-dom";
+즉 react-router-dom의 Link는 Navigation component에 있는데
+이 컴포넌트는 App.js에서 항상 <라우터></라우터> 안에 들어가야 한다.
+(다른 애들 Link같은걸 안쓰면 그 밖에 둬도 됨)
+
+라우터는 HashRouter나 BrowserRouter도 가능하다. 그런데 이는 /#/이 없음. 원하는대로 골라도 되나 BrowerRouter는 깃헙페이지랑 세팅하는게 살짝 귀찮다함.
+--------------------------------------
+
+        <Link to={{
+            pathname: "/movie-detail",
+            state: {
+                year:year,
+                title:title,
+                summary:summary,
+                poster:poster,
+                genres:genres
+            }
+        }}>
+react-router-dom 문서에 따르면 이런 형태로 prop전달 가능. 근데 js라서 꼭 저렇게 안하고 아래처럼 해도 됨
+
+        <Link to={{
+            pathname: "/movie-detail",
+            state: {
+                year,
+                title,
+                summary,
+                poster,
+                genres
+            }
+        }}>
+-----------------------------------------
+홈에서 about이나 detail같은 페이지로 넘어가면 home의 state가 없어진다. 이를 유지하려면 redux같은걸 쓸 수 있다.
+
+여기선 movie list같은걸 따로 어디 뒀다가 about같은데서 home으로 돌아오더라도 유지시켜준다.
+
+react.js 수업 - 멤버쉽
+react hook - 무료
+react native - 무료
+react redux -  무료
